@@ -1,0 +1,1040 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio of Gio — Business Intelligence Analyst transitioning to Data Science. Projects, skills, experience, and blog." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Gio | BI Analyst → Data Science" />
+  <meta property="og:description" content="Projects, skills, experience, and writing on analytics and data science." />
+  <meta property="og:type" content="website" />
+  <!-- Optional: add og:image once you have one -->
+  <!-- <meta property="og:image" content="https://yourdomain.com/og.png" /> -->
+
+  <title>Gio | BI Analyst → Data Science</title>
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.09);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --faint: rgba(255,255,255,0.55);
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+      --accent: #7c3aed; /* purple */
+      --accent2: #22c55e; /* green */
+      --accent3: #06b6d4; /* cyan */
+      --warn: #f59e0b;
+      --danger: #ef4444;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 15% 10%, rgba(124,58,237,0.25), transparent 60%),
+                  radial-gradient(1100px 700px at 90% 20%, rgba(6,182,212,0.18), transparent 60%),
+                  radial-gradient(900px 900px at 50% 95%, rgba(34,197,94,0.14), transparent 60%),
+                  var(--bg);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    .container{ max-width: var(--max); margin: 0 auto; padding: 0 18px; }
+    .skip{
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip:focus{
+      left:18px; top:18px; width:auto; height:auto;
+      background: #000; color:#fff; padding:10px 14px; border-radius: 10px; z-index: 9999;
+    }
+
+    /* Header */
+    header{
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(11,18,32,0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 16px; padding: 14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+    .dot{
+      width: 12px; height: 12px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.15);
+    }
+    .navlinks{
+      display:flex; align-items:center; gap: 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .navlinks a{
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+    .navlinks a:hover{
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.08);
+      text-decoration: none;
+    }
+    .navcta{
+      display:flex; align-items:center; gap: 10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      cursor: pointer;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); text-decoration:none; }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,0.95), rgba(6,182,212,0.85));
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+    .btn.primary:hover{ background: linear-gradient(135deg, rgba(124,58,237,1), rgba(6,182,212,0.95)); }
+    .btn.ghost{ background: transparent; }
+    .burger{
+      display:none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      cursor:pointer;
+    }
+    .burger svg{ display:block; }
+
+    /* Sections */
+    section{ padding: 64px 0; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap: 16px; margin-bottom: 20px;
+    }
+    h1, h2, h3{ margin: 0; }
+    h1{ font-size: clamp(34px, 4vw, 52px); line-height: 1.12; letter-spacing: -0.6px; }
+    h2{ font-size: clamp(22px, 2.6vw, 32px); letter-spacing: -0.4px; }
+    p{ margin: 10px 0 0; color: var(--muted); }
+    .kicker{
+      font-family: var(--mono);
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .pills{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .muted{ color: var(--muted); }
+    .faint{ color: var(--faint); }
+
+    /* Hero */
+    .hero{ padding-top: 40px; padding-bottom: 40px; }
+    .hero .left{ grid-column: 1 / span 7; }
+    .hero .right{ grid-column: 8 / span 5; }
+    .hero-wrap{
+      border-radius: var(--radius2);
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .hero-lede{ font-size: 16px; color: rgba(255,255,255,0.76); margin-top: 14px; }
+    .hero-actions{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .hero-metrics{
+      display:grid; grid-template-columns: repeat(2, 1fr);
+      gap: 12px; margin-top: 18px;
+    }
+    .metric{
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+    }
+    .metric .num{
+      font-size: 18px; font-weight: 800; letter-spacing: -0.2px;
+    }
+    .metric .lbl{ font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* Projects */
+    .filters{ display:flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .chip{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor:pointer;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+      user-select:none;
+    }
+    .chip:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.07); }
+    .chip.active{
+      color: rgba(255,255,255,0.92);
+      border-color: rgba(124,58,237,0.45);
+      background: rgba(124,58,237,0.16);
+    }
+    .project{
+      grid-column: span 4;
+      display:flex; flex-direction: column;
+      gap: 12px;
+      min-height: 230px;
+      position: relative;
+      overflow: hidden;
+    }
+    .project::before{
+      content:"";
+      position:absolute; inset:-80px -120px auto auto;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle at 40% 40%, rgba(124,58,237,0.35), transparent 60%);
+      filter: blur(2px);
+      transform: rotate(18deg);
+      pointer-events:none;
+    }
+    .project .top{ display:flex; justify-content: space-between; align-items:flex-start; gap: 10px; }
+    .badge{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.15);
+      color: rgba(255,255,255,0.75);
+    }
+    .project h3{ font-size: 18px; letter-spacing: -0.2px; }
+    .project p{ font-size: 14px; margin-top: 6px; }
+    .project .tags{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+    .tag{
+      font-size: 12px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.72);
+    }
+    .project .actions{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+    .link{
+      font-size: 13px; color: rgba(255,255,255,0.82);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+    .link:hover{ text-decoration:none; border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.07); }
+
+    /* Skills */
+    .skills{ grid-column: 1 / span 7; }
+    .toolbox{ grid-column: 8 / span 5; }
+    .skill-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .skill{
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.18);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .skill .name{ font-weight: 700; }
+    .skill .desc{ font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* Experience */
+    .timeline{ grid-column: 1 / span 12; }
+    .timeline-item{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    .timeline-item:first-child{ border-top: none; padding-top: 0; }
+    .when{ font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.65); }
+    .role{ font-weight: 800; letter-spacing: -0.2px; }
+    .org{ color: rgba(255,255,255,0.78); }
+    .bullets{ margin: 8px 0 0; padding-left: 16px; color: var(--muted); }
+    .bullets li{ margin: 6px 0; }
+
+    /* Blog */
+    .blog-grid .post{ grid-column: span 6; }
+    .post h3{ font-size: 18px; }
+    .post .meta{ font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 8px; }
+    .post .excerpt{ font-size: 14px; }
+
+    /* Contact */
+    .contact-left{ grid-column: 1 / span 6; }
+    .contact-right{ grid-column: 7 / span 6; }
+    form{ display:flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+    input, textarea{
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.18);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+    input:focus, textarea:focus{ border-color: rgba(6,182,212,0.55); box-shadow: 0 0 0 4px rgba(6,182,212,0.12); }
+    textarea{ min-height: 120px; resize: vertical; }
+    .small{ font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 10px; }
+
+    /* Footer */
+    footer{
+      padding: 26px 0;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+    }
+    .footer-row{ display:flex; align-items:center; justify-content:space-between; gap: 10px; flex-wrap: wrap; }
+    .footlinks{ display:flex; gap: 10px; flex-wrap: wrap; }
+    .footlinks a{ padding: 6px 8px; border-radius: 10px; border: 1px solid transparent; }
+    .footlinks a:hover{ border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.05); text-decoration:none; }
+
+    /* Modal */
+    dialog{
+      width: min(760px, calc(100% - 24px));
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 18px;
+      background: rgba(11,18,32,0.92);
+      color: var(--text);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+      padding: 0;
+    }
+    dialog::backdrop{
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+    }
+    .modal-head{
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      display:flex; align-items:flex-start; justify-content:space-between; gap: 12px;
+    }
+    .modal-body{ padding: 16px 18px 18px; }
+    .modal-title{ font-size: 18px; font-weight: 900; letter-spacing:-0.2px; }
+    .modal-sub{ font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px; }
+    .modal-close{
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor:pointer;
+      font-weight: 700;
+    }
+    .modal-close:hover{ background: rgba(255,255,255,0.09); }
+    .modal-links{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .hr{ height: 1px; background: rgba(255,255,255,0.10); margin: 14px 0; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero .left{ grid-column: 1 / span 12; }
+      .hero .right{ grid-column: 1 / span 12; }
+      .project{ grid-column: span 6; }
+      .skills{ grid-column: 1 / span 12; }
+      .toolbox{ grid-column: 1 / span 12; }
+      .contact-left{ grid-column: 1 / span 12; }
+      .contact-right{ grid-column: 1 / span 12; }
+    }
+    @media (max-width: 680px){
+      .navlinks{ display:none; }
+      .burger{ display:inline-flex; }
+      .project{ grid-column: span 12; }
+      .blog-grid .post{ grid-column: span 12; }
+      .timeline-item{ grid-template-columns: 1fr; }
+    }
+
+    /* Mobile menu */
+    .mobilemenu{
+      display:none;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 10px 0 14px;
+    }
+    .mobilemenu.open{ display:block; }
+    .mobilemenu a{
+      display:block;
+      padding: 10px 10px;
+      border-radius: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+    .mobilemenu a:hover{
+      background: rgba(255,255,255,0.06);
+      text-decoration:none;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container">
+      <div class="nav" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Gio</span>
+          <span class="faint" style="font-weight:600;">| BI → Data Science</span>
+        </a>
+
+        <nav class="navlinks" aria-label="Section links">
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#blog">Blog</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="navcta">
+          <a class="btn ghost" href="#contact" title="Contact">Contact</a>
+          <a class="btn primary" href="#projects" title="View projects">View Projects</a>
+          <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobilemenu" id="mobilemenu" aria-label="Mobile menu">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="grid">
+          <div class="left">
+            <div class="kicker">Business Intelligence • Analytics Engineering • Data Science Track</div>
+            <h1>Building decision-ready analytics now — scaling toward data science.</h1>
+            <p class="hero-lede">
+              I turn messy operational data into dashboards, metrics, and models that drive action.
+              Currently a <strong>Business Intelligence Analyst</strong> moving toward <strong>Data Science</strong>.
+            </p>
+
+            <div class="pills" aria-label="Highlights">
+              <span class="pill">📊 Power BI / Tableau</span>
+              <span class="pill">🧠 SQL-first analysis</span>
+              <span class="pill">🧰 Python for automation</span>
+              <span class="pill">📈 KPI design & stakeholder alignment</span>
+            </div>
+
+            <div class="hero-actions">
+              <!-- Replace these with your actual links -->
+              <a class="btn primary" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn" href="#projects">Featured Projects</a>
+              <a class="btn ghost" href="#contact">Work With Me</a>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="hero-wrap">
+              <div class="kicker">Snapshot</div>
+              <div class="hero-metrics" role="list">
+                <div class="metric" role="listitem">
+                  <div class="num">BI Analyst</div>
+                  <div class="lbl">Current focus</div>
+                </div>
+                <div class="metric" role="listitem">
+                  <div class="num">SQL • Metrics</div>
+                  <div class="lbl">Primary strengths</div>
+                </div>
+                <div class="metric" role="listitem">
+                  <div class="num">Python • ML</div>
+                  <div class="lbl">Growing skillset</div>
+                </div>
+                <div class="metric" role="listitem">
+                  <div class="num">Dashboards</div>
+                  <div class="lbl">Decision support</div>
+                </div>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="kicker">What I’m optimizing for</div>
+              <p style="margin-top: 8px;">
+                Systems that make performance measurable: better inventory decisions, clearer KPIs, faster analysis cycles,
+                and paths from reporting → prediction.
+              </p>
+
+              <div class="pills" style="margin-top: 14px;">
+                <span class="pill">Open to BI / Analytics roles</span>
+                <span class="pill">Also open to DS internships</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Portfolio</div>
+            <h2>Projects</h2>
+            <p>Replace placeholders with your real deliverables (repo, dashboard link, write-up).</p>
+          </div>
+          <div class="pills" aria-label="Portfolio tips">
+            <span class="pill">Tip: include impact metrics</span>
+            <span class="pill">Tip: show screenshots</span>
+          </div>
+        </div>
+
+        <div class="filters" aria-label="Project filters">
+          <span class="chip active" data-filter="all">All</span>
+          <span class="chip" data-filter="bi">BI</span>
+          <span class="chip" data-filter="sql">SQL</span>
+          <span class="chip" data-filter="python">Python</span>
+          <span class="chip" data-filter="ml">ML</span>
+        </div>
+
+        <div class="grid" style="margin-top:16px;" id="projectGrid">
+          <!-- Project cards injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Capability</div>
+            <h2>Skills & Tooling</h2>
+            <p>Structured to match BI roles while signaling data science trajectory.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card skills">
+            <h3>Core skills</h3>
+            <p>Things I use to ship end-to-end analytics.</p>
+
+            <div class="skill-grid">
+              <div class="skill">
+                <div class="name">SQL & Data Modeling</div>
+                <div class="desc">Joins that reflect reality, dimensional modeling, metric definitions.</div>
+              </div>
+              <div class="skill">
+                <div class="name">Dashboarding & Storytelling</div>
+                <div class="desc">Power BI/Tableau, executive-ready layouts, drilldowns, tooltips.</div>
+              </div>
+              <div class="skill">
+                <div class="name">Analytics Engineering</div>
+                <div class="desc">Transformations, QA checks, reusable data layers, documentation.</div>
+              </div>
+              <div class="skill">
+                <div class="name">Python for Analysis</div>
+                <div class="desc">EDA, automation, notebooks, lightweight pipelines.</div>
+              </div>
+              <div class="skill">
+                <div class="name">Experimentation & KPI Design</div>
+                <div class="desc">Define leading indicators, avoid vanity metrics, validate changes.</div>
+              </div>
+              <div class="skill">
+                <div class="name">ML Foundations</div>
+                <div class="desc">Regression/classification basics, evaluation, leakage awareness.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card toolbox">
+            <h3>Tools</h3>
+            <p>Swap to match your actual stack.</p>
+
+            <div class="pills" style="margin-top:14px;">
+              <span class="pill">SQL Server / Postgres</span>
+              <span class="pill">Power BI</span>
+              <span class="pill">Tableau</span>
+              <span class="pill">Excel</span>
+              <span class="pill">Python</span>
+              <span class="pill">Pandas</span>
+              <span class="pill">scikit-learn</span>
+              <span class="pill">Git/GitHub</span>
+              <span class="pill">dbt (optional)</span>
+              <span class="pill">BigQuery (optional)</span>
+            </div>
+
+            <div class="hr"></div>
+
+            <h3 style="margin-top:0;">What I bring</h3>
+            <ul class="bullets">
+              <li>Business-first thinking: start with decisions, then metrics.</li>
+              <li>Stakeholder alignment: definitions, assumptions, and tradeoffs documented.</li>
+              <li>Clean deliverables: reproducible analysis and clear storytelling.</li>
+            </ul>
+
+            <a class="btn" style="margin-top: 10px;" href="#contact">Request a resume</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Professional</div>
+            <h2>Experience</h2>
+            <p>Edit the entries to match your actual roles and results.</p>
+          </div>
+        </div>
+
+        <div class="card timeline">
+          <div class="timeline-item">
+            <div class="when">2025 — Present</div>
+            <div>
+              <div class="role">Business Intelligence Analyst Intern <span class="org">• Company</span></div>
+              <ul class="bullets">
+                <li>Built KPI dashboards and standardized definitions to reduce metric confusion.</li>
+                <li>Automated recurring reporting using SQL + Python to cut manual work.</li>
+                <li>Partnered with stakeholders to translate business questions into measurable outcomes.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="when">2024 — 2025</div>
+            <div>
+              <div class="role">Analytics / School Project <span class="org">• Inventory Decision Dashboard</span></div>
+              <ul class="bullets">
+                <li>Modeled store performance and inventory flow; created decision-ready visuals.</li>
+                <li>Explored buy-better recommendations and category-level insights.</li>
+                <li>Presented findings as “as-is vs to-be” process improvements.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="when">Ongoing</div>
+            <div>
+              <div class="role">Data Science Track <span class="org">• Projects + Writing</span></div>
+              <ul class="bullets">
+                <li>Building ML foundation projects with clean evaluation and clear problem framing.</li>
+                <li>Writing short posts about SQL investigations, dashboards, and analytics thinking.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Writing</div>
+            <h2>Blog</h2>
+            <p>This is a static list for now; you can convert it to real pages later.</p>
+          </div>
+          <div class="pills">
+            <span class="pill">Post cadence: weekly</span>
+            <span class="pill">Topics: BI → DS</span>
+          </div>
+        </div>
+
+        <div class="grid blog-grid">
+          <article class="card post">
+            <h3>SQL as an investigation tool (not just queries)</h3>
+            <div class="meta">Mar 2026 • 4 min read</div>
+            <p class="excerpt">How I approach datasets like a detective: hypotheses, joins, validation checks, and sanity constraints.</p>
+            <div class="modal-links">
+              <a class="link" href="#" aria-disabled="true">Read (placeholder)</a>
+            </div>
+          </article>
+
+          <article class="card post">
+            <h3>Designing KPIs that survive stakeholder questions</h3>
+            <div class="meta">Feb 2026 • 5 min read</div>
+            <p class="excerpt">A practical framework for metric definitions, edge cases, and alignment with decisions.</p>
+            <div class="modal-links">
+              <a class="link" href="#" aria-disabled="true">Read (placeholder)</a>
+            </div>
+          </article>
+
+          <article class="card post">
+            <h3>From dashboards to models: the bridge to data science</h3>
+            <div class="meta">Jan 2026 • 6 min read</div>
+            <p class="excerpt">When prediction helps, when it doesn’t, and how to build the right dataset for modeling.</p>
+            <div class="modal-links">
+              <a class="link" href="#" aria-disabled="true">Read (placeholder)</a>
+            </div>
+          </article>
+
+          <article class="card post">
+            <h3>My BI → DS learning plan (with deliverables)</h3>
+            <div class="meta">Dec 2025 • 7 min read</div>
+            <p class="excerpt">A portfolio-driven approach: each topic ends with a project and a public write-up.</p>
+            <div class="modal-links">
+              <a class="link" href="#" aria-disabled="true">Read (placeholder)</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <div class="kicker">Connect</div>
+            <h2>Contact</h2>
+            <p>Use this for recruiters, collaborators, or freelance analytics work.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card contact-left">
+            <h3>Message me</h3>
+            <p>Fastest response: email or LinkedIn. Form works after you set up Formspree.</p>
+
+            <!-- Replace action with your Formspree endpoint after you create it -->
+            <!-- Example: https://formspree.io/f/abcdwxyz -->
+            <form id="contactForm" action="" method="POST">
+              <input name="name" type="text" placeholder="Your name" autocomplete="name" required />
+              <input name="email" type="email" placeholder="Your email" autocomplete="email" required />
+              <textarea name="message" placeholder="What do you want to build or improve?" required></textarea>
+              <button class="btn primary" type="submit">Send</button>
+              <div class="small" id="formNote">
+                To enable this form: create a free Formspree form and paste the endpoint into <span style="font-family:var(--mono);">action=""</span>.
+              </div>
+            </form>
+          </div>
+
+          <div class="card contact-right">
+            <h3>Quick links</h3>
+            <p>Replace placeholders with your actual profiles and resume.</p>
+            <div class="pills" style="margin-top:14px;">
+              <a class="pill" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a class="pill" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="pill" href="#" aria-disabled="true">Resume (PDF)</a>
+              <a class="pill" href="#" aria-disabled="true">Email</a>
+            </div>
+
+            <div class="hr"></div>
+
+            <h3>What to include in outreach</h3>
+            <ul class="bullets">
+              <li>The decision you’re trying to improve (e.g., inventory buys, retention, spend).</li>
+              <li>Data sources available (POS, CRM, spreadsheets, APIs).</li>
+              <li>Success metric and timeframe.</li>
+            </ul>
+
+            <div class="hr"></div>
+
+            <h3>Availability</h3>
+            <p class="muted">Open to BI / Analytics roles and DS-track internships. Limited freelance availability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-row">
+          <div>© <span id="year"></span> Gio. Built for BI → Data Science.</div>
+          <div class="footlinks">
+            <a href="#top">Top</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Project Modal -->
+  <dialog id="projectModal" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="modalTitle">Project</div>
+        <div class="modal-sub" id="modalSub">Details</div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">Close</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </dialog>
+
+  <script>
+    // ----- Data you should edit -----
+    const PROJECTS = [
+      {
+        title: "Inventory Decision Dashboard",
+        category: "bi",
+        badge: "BI",
+        summary: "Store-level dashboard for category performance, turnover, and buy-better decisions.",
+        impact: ["Reduced time-to-insight by standardizing key KPIs", "Improved visibility into category-level performance"],
+        stack: ["Power BI", "SQL", "Excel"],
+        links: [
+          { label: "Case Study (placeholder)", url: "#" },
+          { label: "Dashboard (placeholder)", url: "#" }
+        ],
+        details: `
+          <p><strong>Problem:</strong> Stakeholders needed a clear view of inventory flow and which categories drive profit and turnover.</p>
+          <p><strong>Approach:</strong> Built a KPI layer (definitions + edge cases), modeled category rollups, and designed a dashboard that supports weekly decision-making.</p>
+          <p><strong>What I'd do next:</strong> Add forecasting for category demand and evaluate buy strategies with a simple experiment design.</p>
+        `
+      },
+      {
+        title: "SQL Investigation Playbook",
+        category: "sql",
+        badge: "SQL",
+        summary: "A structured approach to investigating data issues like a detective: hypotheses, tests, and validation checks.",
+        impact: ["Reusable query templates for QA", "Faster debugging of metric discrepancies"],
+        stack: ["Postgres", "SQL Server"],
+        links: [
+          { label: "Repo (placeholder)", url: "#" },
+          { label: "Write-up (placeholder)", url: "#" }
+        ],
+        details: `
+          <p><strong>Goal:</strong> Reduce repeated work when investigating data inconsistencies.</p>
+          <p><strong>Includes:</strong> null checks, join cardinality checks, outlier detection SQL, sanity constraints, and reconciliations.</p>
+        `
+      },
+      {
+        title: "Automated Reporting Pipeline",
+        category: "python",
+        badge: "PY",
+        summary: "Python scripts to refresh data extracts and generate weekly reporting artifacts automatically.",
+        impact: ["Cut manual reporting steps", "Improved reliability with validation checks"],
+        stack: ["Python", "Pandas", "APIs"],
+        links: [
+          { label: "Repo (placeholder)", url: "#" }
+        ],
+        details: `
+          <p><strong>Flow:</strong> Extract → transform → validate → export.</p>
+          <p><strong>Notes:</strong> Built guardrails (schema checks, row counts, threshold alerts) to prevent silent failures.</p>
+        `
+      },
+      {
+        title: "Customer Churn Model (Starter)",
+        category: "ml",
+        badge: "ML",
+        summary: "Baseline churn model with clear evaluation, leakage checks, and a business interpretation layer.",
+        impact: ["Established a modeling baseline", "Mapped model outputs to retention actions"],
+        stack: ["Python", "scikit-learn"],
+        links: [
+          { label: "Notebook (placeholder)", url: "#" },
+          { label: "Write-up (placeholder)", url: "#" }
+        ],
+        details: `
+          <p><strong>Focus:</strong> Correct framing, clean splits, and realistic evaluation (precision/recall tradeoffs).</p>
+          <p><strong>Next:</strong> Calibration, cost-based thresholding, and simple uplift testing design.</p>
+        `
+      },
+      {
+        title: "Analytics KPI Dictionary",
+        category: "bi",
+        badge: "BI",
+        summary: "A metric dictionary that documents definitions, edge cases, and sources-of-truth to prevent KPI drift.",
+        impact: ["Reduced KPI disputes", "Improved cross-team alignment"],
+        stack: ["SQL", "Docs"],
+        links: [
+          { label: "Template (placeholder)", url: "#" }
+        ],
+        details: `
+          <p><strong>Includes:</strong> definition, numerator/denominator, grain, filters, known edge cases, and owner.</p>
+        `
+      },
+      {
+        title: "Data Cleaning + EDA Pack",
+        category: "python",
+        badge: "PY",
+        summary: "Reusable EDA notebook that generates a compact data-quality report for new datasets.",
+        impact: ["Standardized EDA process", "Faster onboarding to new data sources"],
+        stack: ["Python", "Pandas"],
+        links: [
+          { label: "Repo (placeholder)", url: "#" }
+        ],
+        details: `
+          <p><strong>Outputs:</strong> missingness, distributions, duplicates, correlations, and quick recommendations.</p>
+        `
+      }
+    ];
+
+    // ----- DOM Helpers -----
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+    // Mobile menu
+    const burger = $("#burger");
+    const mobilemenu = $("#mobilemenu");
+    burger?.addEventListener("click", () => {
+      const open = mobilemenu.classList.toggle("open");
+      burger.setAttribute("aria-expanded", String(open));
+    });
+    $$("#mobilemenu a").forEach(a => a.addEventListener("click", () => {
+      mobilemenu.classList.remove("open");
+      burger.setAttribute("aria-expanded", "false");
+    }));
+
+    // Footer year
+    $("#year").textContent = new Date().getFullYear();
+
+    // Projects render + filter
+    const projectGrid = $("#projectGrid");
+    let activeFilter = "all";
+
+    function renderProjects(){
+      const items = PROJECTS.filter(p => activeFilter === "all" ? true : p.category === activeFilter);
+      projectGrid.innerHTML = items.map((p, idx) => `
+        <article class="card project" data-cat="${p.category}">
+          <div class="top">
+            <div>
+              <div class="badge">${p.badge}</div>
+              <h3 style="margin-top:10px;">${p.title}</h3>
+              <p>${p.summary}</p>
+            </div>
+          </div>
+
+          <div class="tags" aria-label="Project stack">
+            ${p.stack.map(s => `<span class="tag">${s}</span>`).join("")}
+          </div>
+
+          <div class="actions">
+            <button class="link" data-open="${idx}">Details</button>
+            ${p.links.slice(0,2).map(l => `<a class="link" href="${l.url}" ${l.url === "#" ? 'aria-disabled="true"' : 'target="_blank" rel="noreferrer"'}>${l.label}</a>`).join("")}
+          </div>
+        </article>
+      `).join("");
+
+      $$("button[data-open]").forEach(btn => {
+        btn.addEventListener("click", () => openModal(Number(btn.dataset.open)));
+      });
+    }
+
+    // Filter chips
+    $$(".chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        $$(".chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        activeFilter = chip.dataset.filter;
+        renderProjects();
+      });
+    });
+
+    // Modal
+    const modal = $("#projectModal");
+    const modalTitle = $("#modalTitle");
+    const modalSub = $("#modalSub");
+    const modalBody = $("#modalBody");
+    const modalClose = $("#modalClose");
+
+    function openModal(i){
+      const p = PROJECTS[i];
+      modalTitle.textContent = p.title;
+      modalSub.textContent = `${p.badge} • Stack: ${p.stack.join(" · ")}`;
+
+      const impactList = (p.impact || []).map(x => `<li>${x}</li>`).join("");
+      const linkList = (p.links || []).map(l => {
+        const disabled = l.url === "#";
+        return `<a class="link" href="${l.url}" ${disabled ? 'aria-disabled="true"' : 'target="_blank" rel="noreferrer"'}>${l.label}</a>`;
+      }).join("");
+
+      modalBody.innerHTML = `
+        <div class="kicker">Impact</div>
+        <ul class="bullets" style="margin-top:8px;">${impactList || "<li>Add measurable results here (time saved, revenue impact, accuracy).</li>"}</ul>
+        <div class="hr"></div>
+        <div class="kicker">Overview</div>
+        ${p.details}
+        <div class="hr"></div>
+        <div class="kicker">Links</div>
+        <div class="modal-links">${linkList || "<span class='muted'>Add links to repo, dashboard, or case study.</span>"}</div>
+      `;
+
+      if (typeof modal.showModal === "function") modal.showModal();
+      else alert("Your browser does not support <dialog>. Try Chrome, Edge, or Safari 16+.");
+    }
+
+    modalClose?.addEventListener("click", () => modal.close());
+    modal?.addEventListener("click", (e) => {
+      const rect = modal.getBoundingClientRect();
+      const inDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                        rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+      if (!inDialog) modal.close();
+    });
+
+    // Contact form note (Formspree)
+    const contactForm = $("#contactForm");
+    contactForm?.addEventListener("submit", (e) => {
+      if (!contactForm.action) {
+        e.preventDefault();
+        alert("To enable the form, add your Formspree endpoint to the form action attribute.");
+      }
+    });
+
+    // Initial render
+    renderProjects();
+  </script>
+</body>
+</html>
