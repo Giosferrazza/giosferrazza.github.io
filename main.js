@@ -32,13 +32,22 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
   }
 })();
 
-/* ---------- Three.js: tasteful background scene ---------- */
+/* ---------- Three.js: connected data points (black + green) ---------- */
 
-// Respect reduced motion
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// Canvas + renderer
 const canvas = $("#scene");
+
+// Basic device heuristics for performance
+const isSmall = Math.min(window.innerWidth, window.innerHeight) < 720;
+const isLowPower = isSmall || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+
+// Network sizing
+const POINTS = isLowPower ? 90 : 140;         // number of nodes
+const MAX_LINKS_PER_POINT = isLowPower ? 3 : 4;
+const CONNECT_DIST = isLowPower ? 1.15 : 1.25; // distance threshold
+const BOX = { x: 4.6, y: 2.6, z: 4.2 };       // volume where points move
+
+// Renderer
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
@@ -46,106 +55,102 @@ const renderer = new THREE.WebGLRenderer({
   powerPreference: "high-performance"
 });
 
-// Cap pixel ratio for mobile performance
 function setRendererSize(){
-  const pr = Math.min(window.devicePixelRatio || 1, 1.6);
+  const pr = Math.min(window.devicePixelRatio || 1, isLowPower ? 1.35 : 1.6);
   renderer.setPixelRatio(pr);
   renderer.setSize(window.innerWidth, window.innerHeight, false);
 }
 setRendererSize();
 
-// Scene + camera
+// Scene/camera
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
-camera.position.set(0, 0.6, 6.5);
+camera.position.set(0, 0.2, 7.2);
 
-// Lighting (subtle)
-const ambient = new THREE.AmbientLight(0xffffff, 0.55);
-scene.add(ambient);
+// Lighting (kept subtle; points/lines are emissive-ish)
+scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+const dir = new THREE.DirectionalLight(0xffffff, 0.35);
+dir.position.set(3, 4, 2);
+scene.add(dir);
 
-const key = new THREE.DirectionalLight(0xffffff, 0.55);
-key.position.set(3, 4, 2);
-scene.add(key);
+// Colors
+const GREEN = new THREE.Color(0x22c55e);
+const GREEN_SOFT = new THREE.Color(0x86efac);
 
-// Group
-const group = new THREE.Group();
-scene.add(group);
+// Points data
+const positions = new Float32Array(POINTS * 3);
+const velocities = new Float32Array(POINTS * 3);
 
-// A soft “data orbit” look: points + rings
-const ringGeo = new THREE.TorusGeometry(1.6, 0.008, 12, 240);
-const ringMat = new THREE.MeshStandardMaterial({
-  color: 0x7c3aed,
-  emissive: 0x16001f,
-  metalness: 0.2,
-  roughness: 0.9,
-  transparent: true,
-  opacity: 0.55
-});
-const ring1 = new THREE.Mesh(ringGeo, ringMat);
-ring1.rotation.x = Math.PI * 0.35;
-ring1.rotation.y = Math.PI * 0.20;
-group.add(ring1);
+function rand(min, max){ return min + Math.random() * (max - min); }
 
-const ring2 = new THREE.Mesh(ringGeo, ringMat.clone());
-ring2.material.color.setHex(0x06b6d4);
-ring2.material.opacity = 0.35;
-ring2.rotation.x = Math.PI * 0.60;
-ring2.rotation.y = Math.PI * -0.15;
-ring2.scale.setScalar(1.25);
-group.add(ring2);
+// Initialize points in a loose 3D blob
+for (let i = 0; i < POINTS; i++){
+  const ix = i * 3;
+  positions[ix + 0] = rand(-BOX.x/2, BOX.x/2);
+  positions[ix + 1] = rand(-BOX.y/2, BOX.y/2);
+  positions[ix + 2] = rand(-BOX.z/2, BOX.z/2);
 
-// Points cloud
-const ptsCount = 1400;
-const positions = new Float32Array(ptsCount * 3);
-const speeds = new Float32Array(ptsCount);
-
-for (let i = 0; i < ptsCount; i++){
-  // donut-ish distribution
-  const r = 1.2 + Math.random() * 1.9;
-  const t = Math.random() * Math.PI * 2;
-  const y = (Math.random() - 0.5) * 1.6;
-  positions[i*3 + 0] = Math.cos(t) * r;
-  positions[i*3 + 1] = y;
-  positions[i*3 + 2] = Math.sin(t) * r;
-  speeds[i] = 0.15 + Math.random() * 0.55;
+  // gentle drift velocities
+  velocities[ix + 0] = rand(-0.18, 0.18) * (isLowPower ? 0.55 : 0.7);
+  velocities[ix + 1] = rand(-0.14, 0.14) * (isLowPower ? 0.55 : 0.7);
+  velocities[ix + 2] = rand(-0.18, 0.18) * (isLowPower ? 0.55 : 0.7);
 }
 
-const ptsGeo = new THREE.BufferGeometry();
-ptsGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+// Points geometry/material
+const pointsGeo = new THREE.BufferGeometry();
+pointsGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-const ptsMat = new THREE.PointsMaterial({
-  color: 0xffffff,
-  size: 0.012,
+const pointsMat = new THREE.PointsMaterial({
+  color: GREEN_SOFT,
+  size: isLowPower ? 0.045 : 0.04,
   transparent: true,
-  opacity: 0.72,
-  depthWrite: false
+  opacity: 0.9,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending
 });
 
-const points = new THREE.Points(ptsGeo, ptsMat);
-group.add(points);
+const pointsObj = new THREE.Points(pointsGeo, pointsMat);
+scene.add(pointsObj);
 
-// A subtle central “core”
-const coreGeo = new THREE.SphereGeometry(0.22, 28, 28);
+// Lines geometry/material (dynamic)
+const maxSegments = POINTS * MAX_LINKS_PER_POINT; // rough cap
+const linePositions = new Float32Array(maxSegments * 2 * 3); // 2 endpoints per segment, 3 coords each
+const lineGeo = new THREE.BufferGeometry();
+lineGeo.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+lineGeo.setDrawRange(0, 0);
+
+const lineMat = new THREE.LineBasicMaterial({
+  color: GREEN,
+  transparent: true,
+  opacity: isLowPower ? 0.20 : 0.18,
+  blending: THREE.AdditiveBlending
+});
+
+const linesObj = new THREE.LineSegments(lineGeo, lineMat);
+scene.add(linesObj);
+
+// A faint “core” glow (optional but looks DS-ish)
+const coreGeo = new THREE.SphereGeometry(0.18, 24, 24);
 const coreMat = new THREE.MeshStandardMaterial({
-  color: 0x0b1220,
-  emissive: 0x220a45,
-  emissiveIntensity: 0.9,
-  roughness: 0.4,
-  metalness: 0.1
+  color: 0x050607,
+  emissive: 0x0b3d1f,
+  emissiveIntensity: 1.2,
+  roughness: 0.6,
+  metalness: 0.0
 });
 const core = new THREE.Mesh(coreGeo, coreMat);
-group.add(core);
+scene.add(core);
 
-// Mouse parallax (small)
+// Parallax
 let targetX = 0, targetY = 0;
 window.addEventListener("pointermove", (e) => {
   const x = (e.clientX / window.innerWidth) * 2 - 1;
   const y = (e.clientY / window.innerHeight) * 2 - 1;
-  targetX = x * 0.25;
-  targetY = -y * 0.15;
+  targetX = x * 0.35;
+  targetY = -y * 0.22;
 }, { passive: true });
 
-// Pause when tab not visible
+// Pause when hidden
 let running = true;
 document.addEventListener("visibilitychange", () => {
   running = !document.hidden;
@@ -158,34 +163,120 @@ window.addEventListener("resize", () => {
   camera.updateProjectionMatrix();
 });
 
-// Animation loop
+// Helpers
+function bounce(val, halfExtent, v){
+  if (val > halfExtent) return { val: halfExtent, v: -Math.abs(v) };
+  if (val < -halfExtent) return { val: -halfExtent, v: Math.abs(v) };
+  return { val, v };
+}
+
+// Build connections: connect each point to up to K nearest neighbors within CONNECT_DIST
+function rebuildLines(){
+  const pos = pointsGeo.attributes.position.array;
+
+  let write = 0;
+  let segCount = 0;
+
+  // For each point i, find nearest neighbors (brute force; fine for <= 160 points)
+  for (let i = 0; i < POINTS; i++){
+    const ix = i * 3;
+    const ax = pos[ix + 0], ay = pos[ix + 1], az = pos[ix + 2];
+
+    // track nearest candidates
+    const best = []; // {j, d2}
+    for (let j = i + 1; j < POINTS; j++){
+      const jx = j * 3;
+      const bx = pos[jx + 0], by = pos[jx + 1], bz = pos[jx + 2];
+      const dx = ax - bx, dy = ay - by, dz = az - bz;
+      const d2 = dx*dx + dy*dy + dz*dz;
+
+      if (d2 <= CONNECT_DIST * CONNECT_DIST){
+        best.push({ j, d2 });
+      }
+    }
+
+    // sort by distance and keep K
+    best.sort((a,b) => a.d2 - b.d2);
+    const take = best.slice(0, MAX_LINKS_PER_POINT);
+
+    for (const b of take){
+      if (segCount >= maxSegments) break;
+
+      const jx = b.j * 3;
+
+      // A -> B
+      linePositions[write++] = ax;
+      linePositions[write++] = ay;
+      linePositions[write++] = az;
+
+      linePositions[write++] = pos[jx + 0];
+      linePositions[write++] = pos[jx + 1];
+      linePositions[write++] = pos[jx + 2];
+
+      segCount++;
+    }
+  }
+
+  lineGeo.setDrawRange(0, segCount * 2);
+  lineGeo.attributes.position.needsUpdate = true;
+}
+
+// Animation
 const clock = new THREE.Clock();
 
 function tick(){
   if (running){
-    const t = clock.getElapsedTime();
+    const dt = Math.min(clock.getDelta(), 0.033); // clamp delta
+    const t = clock.elapsedTime;
 
-    // Slow global rotation
     if (!prefersReducedMotion){
-      group.rotation.y = t * 0.08;
-      group.rotation.x = t * 0.03;
+      // Update points positions
+      const pos = pointsGeo.attributes.position.array;
+      for (let i = 0; i < POINTS; i++){
+        const ix = i * 3;
 
-      // Points gentle drift
-      const pos = ptsGeo.attributes.position.array;
-      for (let i = 0; i < ptsCount; i++){
-        const idx = i * 3;
-        pos[idx + 1] += Math.sin(t * speeds[i] + i) * 0.00008;
+        pos[ix + 0] += velocities[ix + 0] * dt;
+        pos[ix + 1] += velocities[ix + 1] * dt;
+        pos[ix + 2] += velocities[ix + 2] * dt;
+
+        // subtle noise
+        pos[ix + 1] += Math.sin(t * 0.6 + i) * (isLowPower ? 0.0006 : 0.0008);
+
+        // bounce within box
+        const bx = bounce(pos[ix + 0], BOX.x/2, velocities[ix + 0]);
+        const by = bounce(pos[ix + 1], BOX.y/2, velocities[ix + 1]);
+        const bz = bounce(pos[ix + 2], BOX.z/2, velocities[ix + 2]);
+        pos[ix + 0] = bx.val; velocities[ix + 0] = bx.v;
+        pos[ix + 1] = by.val; velocities[ix + 1] = by.v;
+        pos[ix + 2] = bz.val; velocities[ix + 2] = bz.v;
       }
-      ptsGeo.attributes.position.needsUpdate = true;
+      pointsGeo.attributes.position.needsUpdate = true;
 
-      // Parallax smoothing
+      // Rebuild connections (don’t do every frame on low power)
+      const rebuildEvery = isLowPower ? 3 : 2;
+      if (Math.floor(t * 60) % rebuildEvery === 0) rebuildLines();
+
+      // Parallax
       camera.position.x += (targetX - camera.position.x) * 0.04;
-      camera.position.y += (0.6 + targetY - camera.position.y) * 0.04;
+      camera.position.y += (0.2 + targetY - camera.position.y) * 0.04;
+
+      // Gentle camera breathing
+      camera.position.z = 7.2 + Math.sin(t * 0.25) * 0.12;
+
+      // core pulse
+      core.material.emissiveIntensity = 1.0 + (Math.sin(t * 0.9) * 0.15);
+    } else {
+      // Reduced motion: build lines once, keep static
+      rebuildLines();
     }
 
     camera.lookAt(0, 0, 0);
     renderer.render(scene, camera);
   }
+
   requestAnimationFrame(tick);
 }
+
+// Initial build
+rebuildLines();
 tick();
