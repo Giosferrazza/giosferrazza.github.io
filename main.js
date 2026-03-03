@@ -140,6 +140,8 @@ const coreMat = new THREE.MeshStandardMaterial({
 });
 const core = new THREE.Mesh(coreGeo, coreMat);
 scene.add(core);
+// Scene Core made hidden
+core.visible = false;
 
 // Parallax
 let targetX = 0, targetY = 0;
