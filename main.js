@@ -3,6 +3,8 @@ import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+
+
 /* ---------- UI: mobile menu + year + contact guard ---------- */
 (function initUI(){
   const burger = $("#burger");
@@ -42,7 +44,7 @@ const isSmall = Math.min(window.innerWidth, window.innerHeight) < 720;
 const isLowPower = isSmall || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
 
 // Network sizing
-const POINTS = isLowPower ? 90 : 140;         // number of nodes
+const POINTS = isLowPower ? 110 : 200;         // number of nodes
 const MAX_LINKS_PER_POINT = isLowPower ? 3 : 4;
 const CONNECT_DIST = isLowPower ? 1.15 : 1.25; // distance threshold
 const BOX = { x: 6.8, y: 4.0, z: 6.2 }; // Size of Data Points
