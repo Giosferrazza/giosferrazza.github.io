@@ -182,8 +182,8 @@ function clamp(n, min, max){
 function updateParallaxFromClientPoint(clientX, clientY){
   const x = (clientX / window.innerWidth) * 2 - 1;
   const y = (clientY / window.innerHeight) * 2 - 1;
-  targetX = clamp(x * 0.70, -0.78, 0.78);
-  targetY = clamp(-y * 0.46, -0.52, 0.52);
+  targetX = clamp(x * 0.52, -0.78, 0.78);
+  targetY = clamp(-y * 0.34, -0.52, 0.52);
 }
 
 window.addEventListener("pointermove", (e) => {
