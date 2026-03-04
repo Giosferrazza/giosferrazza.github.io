@@ -140,6 +140,29 @@ h2{
 p{ margin:10px 0 0; color: var(--muted); }
 
 .hero{ padding-top:40px; padding-bottom:40px; }
+.hero-layout{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: start;
+}
+.hero-copy{ margin:0; }
+.hero-photo{
+  margin: 0;
+  width: clamp(140px, 22vw, 220px);
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.04);
+  box-shadow: var(--shadow);
+}
+.hero-photo img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
 .lede{
   max-width: 760px;
   font-size: 16px;
@@ -295,6 +318,14 @@ footer{
   .burger{ display:inline-flex; }
   .card{ grid-column: span 12; }
   .trow{ grid-template-columns: 1fr; }
+  .hero-layout{
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hero-photo{
+    justify-self: start;
+    width: min(220px, 62vw);
+  }
 }
 
 /* Reduced motion */
