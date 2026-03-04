@@ -172,13 +172,34 @@ scene.add(core);
 // Scene Core made hidden
 core.visible = false;
 
-// Parallax
+// Parallax (mouse + touch)
 let targetX = 0, targetY = 0;
+
+function clamp(n, min, max){
+  return Math.max(min, Math.min(max, n));
+}
+
+function updateParallaxFromClientPoint(clientX, clientY){
+  const x = (clientX / window.innerWidth) * 2 - 1;
+  const y = (clientY / window.innerHeight) * 2 - 1;
+  targetX = clamp(x * 0.70, -0.78, 0.78);
+  targetY = clamp(-y * 0.46, -0.52, 0.52);
+}
+
 window.addEventListener("pointermove", (e) => {
-  const x = (e.clientX / window.innerWidth) * 2 - 1;
-  const y = (e.clientY / window.innerHeight) * 2 - 1;
-  targetX = x * 0.35;
-  targetY = -y * 0.22;
+  updateParallaxFromClientPoint(e.clientX, e.clientY);
+}, { passive: true });
+
+window.addEventListener("touchstart", (e) => {
+  if (!e.touches || e.touches.length === 0) return;
+  const t = e.touches[0];
+  updateParallaxFromClientPoint(t.clientX, t.clientY);
+}, { passive: true });
+
+window.addEventListener("touchmove", (e) => {
+  if (!e.touches || e.touches.length === 0) return;
+  const t = e.touches[0];
+  updateParallaxFromClientPoint(t.clientX, t.clientY);
 }, { passive: true });
 
 // Pause when hidden
