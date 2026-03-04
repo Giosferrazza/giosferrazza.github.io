@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Giovanni Sferrazza" />
+  <meta name="description" content="Giovanni Sferrazza portfolio home" />
   <meta name="theme-color" content="#0b1220" />
-  <title>Giovanni — Business Intelligence Analyst</title>
+  <title>Giovanni Sferrazza</title>
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Three.js canvas layer -->
   <div id="scene-wrap" aria-hidden="true">
     <canvas id="scene"></canvas>
     <div class="scene-vignette"></div>
@@ -20,17 +20,16 @@
 
   <header>
     <div class="container nav">
-      <a class="brand" href="#top">
+      <a class="brand" href="./index.html">
         <span>Giovanni Sferrazza</span>
-        <span class="faint"></span>
       </a>
 
-      <nav class="navlinks" aria-label="Section links">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
+      <nav class="navlinks" aria-label="Primary">
+        <a class="active" href="./index.html">Home</a>
+        <a href="./projects.html">Projects</a>
+        <a href="./experience.html">Experience</a>
+        <a href="./blog.html">Blog</a>
+        <a href="./contact.html">Contact</a>
       </nav>
 
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
@@ -41,11 +40,11 @@
     </div>
 
     <div class="container mobilemenu" id="mobilemenu" aria-label="Mobile menu">
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#blog">Blog</a>
-      <a href="#contact">Contact</a>
+      <a class="active" href="./index.html">Home</a>
+      <a href="./projects.html">Projects</a>
+      <a href="./experience.html">Experience</a>
+      <a href="./blog.html">Blog</a>
+      <a href="./contact.html">Contact</a>
     </div>
   </header>
 
@@ -54,16 +53,12 @@
       <div class="container hero-layout">
         <div class="kicker hero-copy">
           <h1>BI Analyst</h1>
-          <p class="lede">
-            I turn messy data into actionable insights.
-          </p>
+          <p class="lede">I turn messy data into actionable insights.</p>
 
           <div class="actions">
-            <a class="btn ghost" href="https://www.linkedin.com/in/giovanni-sferrazza/" target="https://www.linkedin.com/in/giovanni-sferrazza/" rel="noreferrer">LinkedIn</a>
-
-            <a class="btn ghost" href="https://github.com/Giosferrazza" target="https://github.com/Giosferrazza" rel="noreferrer">GitHub</a>
-
-            <a class="btn ghost" href="#projects">Projects</a>
+            <a class="btn ghost" href="https://www.linkedin.com/in/giovanni-sferrazza/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn ghost" href="https://github.com/Giosferrazza" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn ghost" href="./projects.html">Projects</a>
           </div>
         </div>
 
@@ -73,52 +68,64 @@
       </div>
     </section>
 
-    <section id="projects">
+    <section>
       <div class="container">
         <div class="section-title">
           <div>
-            <h2>Projects</h2>
+            <h2>Featured Projects</h2>
           </div>
         </div>
 
-        <div class="grid">
-          <article class="card">
+        <div class="grid project-grid">
+          <article class="card project-card">
             <div class="badge">BI</div>
             <h3>Retail Inventory Intelligence System</h3>
             <p>Category performance, turnover, and buy-better views for weekly decisions.</p>
             <div class="tags">
               <span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Excel</span>
             </div>
-            <div class="links">
-              <a class="link" href="#" aria-disabled="true">Case Study</a>
-              <a class="link" href="#" aria-disabled="true">Dashboard</a>
-            </div>
           </article>
 
-          <article class="card">
+          <article class="card project-card">
             <div class="badge">SQL</div>
             <h3>SQL Investigation Playbook</h3>
             <p>Templates for join QA, reconciliation, and debugging metric discrepancies.</p>
             <div class="tags">
               <span class="tag">Postgres</span><span class="tag">SQL Server</span>
             </div>
-            <div class="links">
-              <a class="link" href="#" aria-disabled="true">Repo</a>
-              <a class="link" href="#" aria-disabled="true">Write-up</a>
-            </div>
           </article>
 
-          <article class="card">
+          <article class="card project-card">
             <div class="badge">PY</div>
             <h3>Automated Reporting Pipeline</h3>
-            <p>Extract → transform → validate → export with guardrails.</p>
+            <p>Extract to transform to validate to export with guardrails.</p>
             <div class="tags">
               <span class="tag">Python</span><span class="tag">Pandas</span>
             </div>
-            <div class="links">
-              <a class="link" href="#" aria-disabled="true">Repo</a>
-            </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>About</h2>
+          </div>
+        </div>
+        <div class="card">
+          <p>
+            I’m a Business Intelligence Analyst focused on turning messy operational
+            data into decision-ready insights.
+          </p>
+          <p>
+            My work centers on SQL-driven analysis, dashboard design, and building
+            analytics workflows that help teams move from intuition to evidence.
+          </p>
+          <p>
+            I’m currently expanding into data science and predictive modeling.
+          </p>
         </div>
       </div>
     </section>
@@ -132,119 +139,24 @@
         </div>
 
         <div class="grid two">
-          <div class="card">
+          <article class="card">
             <h3>Core</h3>
             <ul class="bullets">
               <li>SQL, dimensional modeling, metric definitions</li>
-              <li>Dashboards + stakeholder storytelling</li>
-              <li>Analytics engineering + QA checks</li>
-              <li>Python for analysis + automation</li>
+              <li>Dashboards and stakeholder storytelling</li>
+              <li>Analytics engineering and QA checks</li>
+              <li>Python for analysis and automation</li>
             </ul>
-          </div>
-          <div class="card">
+          </article>
+
+          <article class="card">
             <h3>Tooling</h3>
             <div class="pills">
               <span class="pill">Power BI</span><span class="pill">Tableau</span><span class="pill">Excel</span>
               <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">scikit-learn</span>
               <span class="pill">Git/GitHub</span>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Experience</h2>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="timeline">
-            <div class="trow">
-              <div class="when">2025 — Present</div>
-              <div>
-                <div class="role">BI Analyst Intern • Company</div>
-                <ul class="bullets">
-                  <li>Built KPI dashboards and standardized definitions.</li>
-                  <li>Automated recurring reporting with SQL + Python.</li>
-                  <li>Partnered with stakeholders to translate questions into outcomes.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="trow">
-              <div class="when">2024 — 2025</div>
-              <div>
-                <div class="role">Inventory Decision Dashboard • Project</div>
-                <ul class="bullets">
-                  <li>Modeled performance and built decision-ready visuals.</li>
-                  <li>Presented “as-is vs to-be” process improvements.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="blog">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Blog</h2>
-            <p>Keep posts short and tactical.</p>
-          </div>
-        </div>
-
-        <div class="grid two">
-          <article class="card">
-            <h3>SQL as an investigation tool</h3>
-            <p>Hypothesis → test → validation → explanation.</p>
-            <div class="links"><a class="link" href="#" aria-disabled="true">Read</a></div>
           </article>
-
-          <article class="card">
-            <h3>Designing KPIs that survive stakeholder questions</h3>
-            <p>Grain, definitions, edge cases, ownership, QA.</p>
-            <div class="links"><a class="link" href="#" aria-disabled="true">Read</a></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h2>Contact</h2>
-          </div>
-        </div>
-
-        <div class="grid two">
-          <div class="card">
-            <h3>Reach out</h3>
-            <p>Use email/LinkedIn or wire this form to Formspree.</p>
-            <form id="contactForm" action="" method="POST">
-              <input name="name" type="text" placeholder="Your name" autocomplete="name" required />
-              <input name="email" type="email" placeholder="Your email" autocomplete="email" required />
-              <textarea name="message" placeholder="What do you want to build or improve?" required></textarea>
-              <button class="btn primary" type="submit">Send</button>
-              <div class="small">To enable: paste a Formspree endpoint into <code>action=""</code>.</div>
-            </form>
-          </div>
-
-          <div class="card">
-            <h3>Links</h3>
-            <div class="pills">
-              <a class="pill" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-              <a class="pill" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-              <a class="pill" href="#" aria-disabled="true">Resume PDF</a>
-            </div>
-            <div class="hr"></div>
-            <p class="muted">Open to BI / Analytics roles and DS-track internships.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -253,9 +165,9 @@
       <div class="container foot">
         <div>© <span id="year"></span> Giovanni Sferrazza</div>
         <div class="footlinks">
-          <a href="#top">Top</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+          <a href="./index.html">Home</a>
+          <a href="./projects.html">Projects</a>
+          <a href="./contact.html">Contact</a>
         </div>
       </div>
     </footer>
