@@ -44,9 +44,9 @@ const isSmall = Math.min(window.innerWidth, window.innerHeight) < 720;
 const isLowPower = isSmall || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
 
 // Network sizing
-const POINTS = isLowPower ? 110 : 200;         // number of nodes
-const MAX_LINKS_PER_POINT = isLowPower ? 3 : 4;
-const CONNECT_DIST = isLowPower ? 1.15 : 1.25; // distance threshold
+const POINTS = isLowPower ? 110 : 200;
+const MAX_LINKS_PER_POINT = isLowPower ? 3 : 3;
+const CONNECT_DIST = isLowPower ? 1.20 : 1.35;
 const BOX = { x: 6.8, y: 4.0, z: 6.2 }; // Size of Data Points
 
 // Renderer
