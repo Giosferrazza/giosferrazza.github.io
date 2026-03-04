@@ -378,6 +378,7 @@ footer{
 @media (max-width: 680px){
   .navlinks{ display:none; }
   .burger{ display:inline-flex; }
+  .brand{ padding-left: 8px; }
   .card{ grid-column: span 12; }
   .trow{ grid-template-columns: 1fr; }
   .hero-layout{
@@ -385,7 +386,7 @@ footer{
     gap: 16px;
   }
   .hero-photo{
-    justify-self: start;
+    justify-self: center;
     width: min(220px, 62vw);
   }
 }
