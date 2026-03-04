@@ -48,13 +48,12 @@
       <div class="container grid two">
         <article class="card">
           <h3>Reach out</h3>
-          <p>Use email/LinkedIn or wire this form to Formspree.</p>
-          <form id="contactForm" action="" method="POST">
+          <p>Use this form to open your email app, or contact me on LinkedIn.</p>
+          <form id="contactForm" action="mailto:giosferrazza12@gmail.com" method="POST" enctype="text/plain">
             <input name="name" type="text" placeholder="Your name" autocomplete="name" required />
             <input name="email" type="email" placeholder="Your email" autocomplete="email" required />
             <textarea name="message" placeholder="What do you want to build or improve?" required></textarea>
             <button class="btn primary" type="submit">Send</button>
-            <div class="small">To enable: paste a Formspree endpoint into <code>action=""</code>.</div>
           </form>
         </article>
 

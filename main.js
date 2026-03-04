@@ -26,9 +26,36 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
   const form = $("#contactForm");
   if (form){
     form.addEventListener("submit", (e) => {
-      if (!form.action){
+      const rawAction = (form.getAttribute("action") || "").trim();
+
+      if (!rawAction){
         e.preventDefault();
         alert('To enable the form, add your Formspree endpoint to the form action attribute.');
+        return;
+      }
+
+      if (rawAction.toLowerCase().startsWith("mailto:")){
+        e.preventDefault();
+
+        const to = rawAction.replace(/^mailto:/i, "").trim();
+        const name = (form.elements.namedItem("name")?.value || "").trim();
+        const email = (form.elements.namedItem("email")?.value || "").trim();
+        const message = (form.elements.namedItem("message")?.value || "").trim();
+
+        const subject = encodeURIComponent(
+          `Portfolio Contact: ${name || "Website Visitor"}`
+        );
+        const body = encodeURIComponent(
+          [
+            `Name: ${name || "-"}`,
+            `Email: ${email || "-"}`,
+            "",
+            "Message:",
+            message || "-"
+          ].join("\n")
+        );
+
+        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
       }
     });
   }
