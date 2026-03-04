@@ -45,7 +45,7 @@ const isLowPower = isSmall || (navigator.hardwareConcurrency && navigator.hardwa
 const POINTS = isLowPower ? 90 : 140;         // number of nodes
 const MAX_LINKS_PER_POINT = isLowPower ? 3 : 4;
 const CONNECT_DIST = isLowPower ? 1.15 : 1.25; // distance threshold
-const BOX = { x: 4.6, y: 2.6, z: 4.2 };       // volume where points move
+const BOX = { x: 6.8, y: 4.0, z: 6.2 }; // Size of Data Points
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -65,7 +65,7 @@ setRendererSize();
 // Scene/camera
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
-camera.position.set(0, 0.2, 7.2);
+camera.position.set(0, 0.2, 8.8);
 
 // Lighting (kept subtle; points/lines are emissive-ish)
 scene.add(new THREE.AmbientLight(0xffffff, 0.35));
