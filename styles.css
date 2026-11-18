@@ -292,6 +292,11 @@ p{ margin:10px 0 0; color: var(--muted); }
   box-shadow: 0 16px 34px rgba(0,0,0,0.48), 0 0 0 1px rgba(34,197,94,0.20), 0 0 26px rgba(34,197,94,0.22);
 }
 .project-card:hover::after{ opacity: 1; }
+.project-card.featured{
+  grid-column: 1 / -1;
+  border-color: rgba(34,197,94,0.35);
+}
+.project-card.featured .bullets{ margin: 10px 0 12px; }
 .project-card .badge,
 .project-card .tag,
 .project-card .link{
